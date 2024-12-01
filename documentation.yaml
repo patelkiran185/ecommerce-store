@@ -1,0 +1,221 @@
+openapi: 3.0.0
+info:
+  title: API Specification
+  version: v1
+paths:
+  /images/domains:
+    get:
+      parameters: []
+      description: Retrieve a list of image domains supported by Tailwind UI.
+      tags:
+        - Images
+        - Domain
+      responses:
+        '200':
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+    post:
+      parameters:
+        - name: domains
+          in: body
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      description: Add a new image domain to the list of supported domains.
+      tags:
+        - Images
+        - Domain
+      responses:
+        '201':
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                  - message
+  /images/domains/{domain}:
+    get:
+      parameters:
+        - name: domain
+          in: path
+          required: true
+          schema:
+            type: string
+      description: Retrieve the details of a specific image domain.
+      tags:
+        - Images
+        - Domain
+      responses:
+        '200':
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  url:
+                    type: string
+                required:
+                  - name
+                  - url
+    put:
+      parameters:
+        - name: domain
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: newDomain
+          in: query
+          required: false
+          schema:
+            type: string
+      description: Update the details of a specific image domain.
+      tags:
+        - Images
+        - Domain
+      responses:
+        '200':
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  url:
+                    type: string
+                required:
+                  - name
+                  - url
+    delete:
+      parameters:
+        - name: domain
+          in: path
+          required: true
+          schema:
+            type: string
+      description: Delete a specific image domain.
+      tags:
+        - Images
+        - Domain
+      responses:
+        '204':
+          description: ""
+  /example:
+    get:
+      parameters: []
+      description: Retrieves a list of examples.
+      tags:
+        - Examples
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Example'
+      description: Creates a new example.
+      tags:
+        - Examples
+  /example/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      description: Retrieves an example by ID.
+      tags:
+        - Examples
+    put:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Example'
+      description: Updates an example.
+      tags:
+        - Examples
+    delete:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      description: Deletes an example.
+      tags:
+        - Examples
+  /categories:
+    get:
+      parameters: []
+      description: Retrieves a list of categories.
+      tags:
+        - Categories
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+      description: Creates a new category.
+      tags:
+        - Categories
+  /categories/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      description: Retrieves a category by ID.
+      tags:
+        - Categories
+    put:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+      description: Updates a category.
+      tags:
+        - Categories
+    delete:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      description: Deletes a category.
+      tags:
+        - Categories
+components:
+  schemas:
+    Example:
+      type: object
+    Category:
+      type: object
+
